@@ -1717,3 +1717,7 @@ input, select, textarea {
     opacity: 1;
     transform: none;
 }
+
+.blog-page #blog .post {
+    border: none !important; /* Zorgt ervoor dat de rand van de post-elementen wordt verwijderd */
+}
