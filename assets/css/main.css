@@ -1711,3 +1711,24 @@ input, select, textarea {
 .blog-page #blog .post-link:hover .post {
     background-color: rgba(255, 255, 255, 0.1); /* Change background on hover to indicate it's clickable */
 }
+
+/* Search bar styling */
+#search-container {
+    padding: 1rem;
+    text-align: center;
+}
+
+#search-input {
+    width: 80%;
+    max-width: 500px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background-color: #1b1f22;
+    color: #ffffff;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
