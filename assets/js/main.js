@@ -6,8 +6,8 @@
 
 (function($) {
 
-	if (!$('body').hasClass('index-page')) return;
-	
+	if (!window.location.pathname.includes('index.html')) return;
+
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
