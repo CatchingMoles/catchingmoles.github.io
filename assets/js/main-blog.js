@@ -44,7 +44,8 @@
         $nav_li.eq($nav_li.length / 2).addClass('is-middle');
     }
 
-	// JavaScript for filtering blog posts on Enter key press
+	
+// JavaScript for filtering blog posts on Enter key press
 document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search-input");
     const posts = document.querySelectorAll(".post");
@@ -76,5 +77,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
 })(jQuery);
