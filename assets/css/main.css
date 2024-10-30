@@ -1698,27 +1698,17 @@ input, select, textarea {
 			opacity: 0;
 		}
 
-/* Ervoor zorgen dat de blogpagina dezelfde layout heeft */
-.blog-page #main {
-    display: flex; /* Erft de flex-layout */
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 100%; /* Zorgt dat het zich aanpast aan schermgrootte */
-    padding: 4rem 2rem; /* Afhankelijk van de stijl van andere pagina's */
-}
-
-.blog-page #main article {
-    width: 40rem; /* Pas dit aan als het te breed of smal is */
-    max-width: 100%;
-    padding: 4.5rem 2.5rem 1.5rem 2.5rem;
-    background-color: rgba(27, 31, 34, 0.85); /* Consistent met andere pagina’s */
-    border-radius: 4px;
-    opacity: 1;
-    transform: none;
+/* Ensure blog posts are displayed correctly and the entire section is clickable */
+.blog-page #blog .post-link {
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit text color from parent */
+    display: block; /* Make the entire link area clickable */
 }
 
 .blog-page #blog .post {
-    border: none !important; /* Zorgt ervoor dat de rand van de post-elementen wordt verwijderd */
-	box-shadow: none !important;
+    transition: background-color 0.3s ease; /* Smooth background change on hover */
+}
+
+.blog-page #blog .post-link:hover .post {
+    background-color: rgba(255, 255, 255, 0.1); /* Change background on hover to indicate it's clickable */
 }
