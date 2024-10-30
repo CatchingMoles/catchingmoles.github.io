@@ -6,7 +6,7 @@
 
 (function($) {
 
-	if (!window.location.pathname.includes('index.html')) return;
+	if (window.location.pathname.endsWith('blog.html')) return;
 
 	var	$window = $(window),
 		$body = $('body'),
