@@ -43,28 +43,38 @@
         $nav.addClass('use-middle');
         $nav_li.eq($nav_li.length / 2).addClass('is-middle');
     }
-	
-	// JavaScript for filtering blog posts
-	document.addEventListener("DOMContentLoaded", function () {
-		const searchInput = document.getElementById("search-input");
-		const posts = document.querySelectorAll(".post");
 
-		// Listen for input in the search bar
-		searchInput.addEventListener("input", function (e) {
-			const searchText = e.target.value.toLowerCase();
+	// JavaScript for filtering blog posts on Enter key press
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const posts = document.querySelectorAll(".post");
+    const noResultsMessage = document.getElementById("no-results");
 
-			posts.forEach(post => {
-				const title = post.querySelector("h3").innerText.toLowerCase();
-				const content = post.querySelector("p").innerText.toLowerCase();
+    // Listen for keydown event on the search input
+    searchInput.addEventListener("keydown", function (e) {
+        if (e.keyCode === 13) { // 13 is the Enter key
+            e.preventDefault(); // Prevent default form submission or behavior
 
-				// Check if the search text is in the title or content
-				if (title.includes(searchText) || content.includes(searchText)) {
-					post.style.display = "block"; // Show the post if it matches
-				} else {
-					post.style.display = "none"; // Hide the post if it doesn't match
-				}
-			});
-		});
-	});
+            const searchText = e.target.value.toLowerCase();
+            let matchFound = false;
+
+            posts.forEach(post => {
+                const title = post.querySelector("h3").innerText.toLowerCase();
+                const content = post.querySelector("p").innerText.toLowerCase();
+
+                // Check if the search text is in the title or content
+                if (title.includes(searchText) || content.includes(searchText)) {
+                    post.style.display = "block"; // Show the post if it matches
+                    matchFound = true;
+                } else {
+                    post.style.display = "none"; // Hide the post if it doesn't match
+                }
+            });
+
+            // Show or hide the "No results" message
+            noResultsMessage.style.display = matchFound ? "none" : "block";
+        }
+    });
+});
 
 })(jQuery);
