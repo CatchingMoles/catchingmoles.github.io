@@ -1715,6 +1715,7 @@ input, select, textarea {
 /* Search bar styling */
 #search-container {
     padding: 1rem;
+	margin-top: 2rem;
     text-align: center;
 }
 
