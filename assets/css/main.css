@@ -1697,3 +1697,11 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+		/* Zorg dat #main en zijn artikelen zichtbaar zijn op de blogpagina */
+.blog-page #main,
+.blog-page #main article {
+    display: block;
+    opacity: 1;
+    transform: none;
+}
