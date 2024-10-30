@@ -6,6 +6,8 @@
 
 (function($) {
 
+	if (!$('body').hasClass('index-page')) return;
+	
 	var	$window = $(window),
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
