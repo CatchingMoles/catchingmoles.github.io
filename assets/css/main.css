@@ -1698,10 +1698,22 @@ input, select, textarea {
 			opacity: 0;
 		}
 
-		/* Zorg dat #main en zijn artikelen zichtbaar zijn op de blogpagina */
-.blog-page #main,
+/* Ervoor zorgen dat de blogpagina dezelfde layout heeft */
+.blog-page #main {
+    display: flex; /* Erft de flex-layout */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100%; /* Zorgt dat het zich aanpast aan schermgrootte */
+    padding: 4rem 2rem; /* Afhankelijk van de stijl van andere pagina's */
+}
+
 .blog-page #main article {
-    display: block;
+    width: 40rem; /* Pas dit aan als het te breed of smal is */
+    max-width: 100%;
+    padding: 4.5rem 2.5rem 1.5rem 2.5rem;
+    background-color: rgba(27, 31, 34, 0.85); /* Consistent met andere pagina’s */
+    border-radius: 4px;
     opacity: 1;
     transform: none;
 }
