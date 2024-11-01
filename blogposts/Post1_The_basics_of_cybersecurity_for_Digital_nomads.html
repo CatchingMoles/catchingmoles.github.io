@@ -74,6 +74,26 @@
         </section>
     </article>
 </div>
+<div id="comments">
+    <h3>Leave a Comment</h3>
+    <form id="comment-form" action="#" method="POST" onsubmit="return validateComment();">
+        <div class="field">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required />
+        </div>
+        <div class="field">
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment" rows="5" required></textarea>
+        </div>
+        <ul class="actions">
+            <li><input type="submit" value="Post Comment" class="primary" /></li>
+        </ul>
+    </form>
+    <div id="comment-list">
+        <!-- Comments will be dynamically added here -->
+    </div>
+</div>
+</div>
 
         <!-- Footer -->
         <footer id="footer">
