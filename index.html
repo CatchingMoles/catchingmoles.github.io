@@ -1,369 +1,405 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Catching Moles | Information Security Professional</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self' ; script-src https://www.googletagmanager.com/gtag/js?id=G-MLW49NFZVV 'self'; style-src 'self' https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600;">
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Catching Moles | Senior Azure Security Engineer</title>
+	<meta name="description"
+		content="Senior Azure Security Consultant bridging the gap between complex cloud architecture and business compliance.">
 
-				<!-- Header -->
-					<header id="header">
-						<!-- <div class="logo">
-							<span class="icon fa-user"></span>
-						</div> -->
-						<div class="content">
-							<div class="inner">
-								<h1>Catching Moles</h1>
-								<p>Luuk Mollevanger | Information Security Management</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="blog.html">Blog</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+	<!-- Content Security Policy -->
+	<meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data:;
+        connect-src 'self';
+    ">
 
-				<!-- Main -->
-					<div id="main">
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<!-- <span class="image main"><img src="" alt="" /></span> -->
-								<p>Welcome to my personal page! You might have found this page on one of my socials or my resume. My name is Luuk Mollevanger. In Dutch, "Mollevanger" translates to mole catcher (Hence the name ;-) ). You can check out some of my work <a href="#work">here</a>.</p>
-								<p>I hope to give you some more insights in who I am and what I do. If you have any feedback on my page or if you would like to come in touch with me, please don't hesitate to head over to the <a href="#contact">contact page. </a></p>
-							</article>
+	<!-- Tailwind CSS CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						sans: ['Inter', 'sans-serif'],
+						mono: ['Fira Code', 'monospace'],
+					},
+					colors: {
+						slate: {
+							950: '#0a0f1a',
+							900: '#0f172a',
+							800: '#1e293b',
+						}
+					}
+				}
+			}
+		}
+	</script>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic2.png" alt="" /></span>
-								<h3><a href="https://www.visma.nl/connect-nl/">Visma connect</a></h3>
-								<p>While studing information security management, Visma connect (formerly EBPI) had given me the chance to work as a junior securiy professional to enhance their security maturity level. It was a fun challenge to create more awareness within the company, create business continuity plans and work together with the team to comply with auditory standards. This was a part time job and a good start to my security career.</p>
-								<h3><a href="https://www.wortell.nl/nl">Wortell</a></h3>
-								<p>I've worked for wortell for a period of 3.5 years as a security analist and trainee. I had the opportunity to work for a very fast growing microsoft partner with some of the best security professionals on a technical level. I have learned about attack techniques, attack surface management, azure sentinel, azure security stack, incident investigation, management, response and remediation. I had a blast at this company and loved learning at a very high pace. </p>
-								<h3><a href="https://www.royalfloraholland.com/">Royal Flora Holland</a></h3>
-								<p>From december 2023 till september 2024, I have worked as an Information Security Officer at Royal Flora Holland! This was mostly focussed on strategic and tactical planning around information security management for a 12B euro revenue company. I have worked with Identity and Access Management systems, policies regarding information security management (mostly focussed on AI) While this job was challenging and fun in it's own way, I missed the technical part of information security</p>
-								<h3><a href="https://www.nederlandseloterij.nl/">Nederlandse Loterij</a></h3>
-								<p>As of september 2024, I've started as a security engineer at the dutch lotery. This job has a high focus on translating strategic policies to life using different techniques. I am working on finding a balance between usability of the user and security for the organization. In this position, I'm the right hand of the security architect.</p>
-							</article>
+	<!-- Noscript: Hide preloader if JS is disabled -->
+	<noscript>
+		<style>
+			#preloader {
+				display: none !important;
+			}
+		</style>
+	</noscript>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<!-- <span class="image main"><img src="" alt="" /></span> -->
-								<p>A bit more about me: I'm passionate about technology, IT, security, blockchain.. and craft beers! I love to work-out with some friends, play some video games, go hiking with my girlfriend and cooking elaborate dishes.</p>
-								<p>On a more professional level, communicating and translating complex security measures to workable and balanced operations is my most fun challenge. I have a BsC in information security management from the Hague university of applied sciences. I aim to use my technical background as a security analist to really grasp the meaning and impact of security measures that come from a strategic perspective</p>
-								<p>In addition to my work I like to work on old motorcycles, techie stuff and DIYing in my house.</p>
-								<p>I hope to have peaked your interest with my own website! If you would love to come in touch with me, please leave your contact information <a href="#contact">here. </a></p>
-							</article>
+	<!-- FOUC Prevention: Inline script to check localStorage before render -->
+	<script>
+			(function () {
+				var timestamp = localStorage.getItem('moles_loader_timestamp');
+				var now = Date.now();
+				var twentyFourHours = 24 * 60 * 60 * 1000;
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<!-- <p>Sorry.. this is not working yet! Please send an email to luuk.mollevanger@gmail.com</p>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" onclick="sendEmail()"/></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>-->
-								<ul class="icons">
-									<li><a href="https://github.com/CatchingMoles" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="https://www.linkedin.com/in/luuk-mollevanger/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									<li><a href="window.open('mailto:luuk.mollevanger@gmail.com')" class="icon fa-envelope"><span class="label">E-mail</span></a></li>
-								</ul>
-							</article>
+				if (timestamp && (now - parseInt(timestamp, 10)) < twentyFourHours) {
+					// Less than 24 hours: hide preloader instantly
+					document.documentElement.classList.add('preloader-hidden');
+				}
+			})();
+	</script>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
+	<style>
+		/* Preloader hidden state - applied via JS in head */
+		.preloader-hidden #preloader {
+			display: none !important;
+		}
 
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
+		/* Blinking cursor animation */
+		@keyframes blink {
 
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
+			0%,
+			50% {
+				opacity: 1;
+			}
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
+			51%,
+			100% {
+				opacity: 0;
+			}
+		}
 
-								<section>
-									<h3 class="major">Lists</h3>
+		.cursor-blink {
+			animation: blink 1s infinite;
+		}
 
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+		/* Fade out animation */
+		@keyframes fadeOut {
+			from {
+				opacity: 1;
+			}
 
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+			to {
+				opacity: 0;
+			}
+		}
 
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
+		.fade-out {
+			animation: fadeOut 0.5s ease-out forwards;
+		}
 
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
+		/* Smooth scrollbar for dark theme */
+		::-webkit-scrollbar {
+			width: 8px;
+		}
 
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
+		::-webkit-scrollbar-track {
+			background: #0a0f1a;
+		}
 
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
+		::-webkit-scrollbar-thumb {
+			background: #334155;
+			border-radius: 4px;
+		}
 
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
+		::-webkit-scrollbar-thumb:hover {
+			background: #475569;
+		}
+	</style>
+</head>
 
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>	
+<body class="bg-slate-950 text-gray-100 font-sans antialiased">
 
-							</article>
-						
-					</div>
+	<!-- ==================== PRELOADER ==================== -->
+	<div id="preloader" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
+		<div class="text-center">
+			<div class="font-mono text-lg sm:text-xl text-green-400">
+				<span id="terminal-text"></span><span class="cursor-blink text-green-400">█</span>
+			</div>
+		</div>
+	</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; copyright 2023-2025. </p>
-					</footer>
+	<!-- ==================== NAVIGATION ==================== -->
+	<header class="fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
+		<nav class="max-w-6xl mx-auto px-6 py-4">
+			<div class="flex items-center justify-between">
+				<!-- Logo -->
+				<a href="#" class="font-mono text-lg font-semibold text-white hover:text-green-400 transition-colors">
+					&lt;CM/&gt;
+				</a>
 
+				<!-- Desktop Navigation -->
+				<ul class="hidden md:flex items-center space-x-8">
+					<li><a href="#about" class="text-sm text-gray-400 hover:text-white transition-colors">About</a></li>
+					<li><a href="#skills" class="text-sm text-gray-400 hover:text-white transition-colors">Skills</a>
+					</li>
+					<li><a href="#tool" class="text-sm text-gray-400 hover:text-white transition-colors">The Tool</a>
+					</li>
+					<li><a href="#contact" class="text-sm text-gray-400 hover:text-white transition-colors">Contact</a>
+					</li>
+				</ul>
+
+				<!-- Mobile Menu Button -->
+				<button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white transition-colors"
+					aria-label="Toggle menu">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
 			</div>
 
-		<!-- BG -->
-			<div id="bg"></div>
-			
-		
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="../assets/js/gtag.js"></script>
+			<!-- Mobile Navigation -->
+			<div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-slate-800 pt-4">
+				<ul class="space-y-4">
+					<li><a href="#about"
+							class="block text-sm text-gray-400 hover:text-white transition-colors">About</a></li>
+					<li><a href="#skills"
+							class="block text-sm text-gray-400 hover:text-white transition-colors">Skills</a></li>
+					<li><a href="#tool" class="block text-sm text-gray-400 hover:text-white transition-colors">The
+							Tool</a></li>
+					<li><a href="#contact"
+							class="block text-sm text-gray-400 hover:text-white transition-colors">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 
-	</body>
+	<!-- ==================== MAIN CONTENT ==================== -->
+	<main>
+
+		<!-- Hero Section -->
+		<section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-20">
+			<div class="max-w-4xl mx-auto text-center">
+				<!-- Tagline -->
+				<p class="font-mono text-sm text-green-400 tracking-wider uppercase mb-6">
+					// Azure Security Specialist
+				</p>
+
+				<!-- Headline -->
+				<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+					Senior Azure Security Engineer
+				</h1>
+
+				<!-- Sub-headline -->
+				<p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+					Bridging the gap between complex cloud architecture and business compliance.
+				</p>
+
+				<!-- CTA Button -->
+				<a href="#contact"
+					class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-slate-950 font-mono font-semibold px-8 py-4 rounded transition-all hover:shadow-lg hover:shadow-green-500/25">
+					<span>Get in Touch</span>
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M17 8l4 4m0 0l-4 4m4-4H3" />
+					</svg>
+				</a>
+
+				<!-- Scroll indicator -->
+				<div class="mt-20 animate-bounce">
+					<svg class="w-6 h-6 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+					</svg>
+				</div>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section id="about" class="py-24 px-6">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="font-mono text-sm text-green-400 tracking-wider uppercase mb-4">// About</h2>
+				<h3 class="text-3xl sm:text-4xl font-bold text-white mb-8">Security-First Mindset</h3>
+				<div class="prose prose-lg prose-invert max-w-none">
+					<p class="text-gray-400 leading-relaxed text-lg">
+						With deep expertise in Microsoft Azure security, I help organizations design, implement, and
+						maintain robust cloud security postures. From identity governance to network segmentation, I
+						translate complex security requirements into actionable solutions that align with business
+						objectives.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Skills Section -->
+		<section id="skills" class="py-24 px-6 bg-slate-900/50">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="font-mono text-sm text-green-400 tracking-wider uppercase mb-4">// Skills</h2>
+				<h3 class="text-3xl sm:text-4xl font-bold text-white mb-12">Technical Expertise</h3>
+
+				<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+					<!-- Skill Cards -->
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">Azure Security</h4>
+						<p class="text-sm text-gray-400">Defender for Cloud, Sentinel, Key Vault, Policy</p>
+					</div>
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">Identity & Access</h4>
+						<p class="text-sm text-gray-400">Entra ID, PIM, Conditional Access, Zero Trust</p>
+					</div>
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">Compliance</h4>
+						<p class="text-sm text-gray-400">ISO 27001, SOC 2, GDPR, Azure Policy</p>
+					</div>
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">Network Security</h4>
+						<p class="text-sm text-gray-400">NSG, Firewall, Private Link, DDoS Protection</p>
+					</div>
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">DevSecOps</h4>
+						<p class="text-sm text-gray-400">IaC Security, Pipeline Hardening, Bicep</p>
+					</div>
+					<div
+						class="p-6 bg-slate-800/50 border border-slate-700/50 rounded-lg hover:border-green-500/30 transition-colors">
+						<h4 class="font-mono text-green-400 font-semibold mb-2">Threat Detection</h4>
+						<p class="text-sm text-gray-400">KQL, SIEM, Incident Response, MITRE ATT&CK</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- The Tool Section -->
+		<section id="tool" class="py-24 px-6">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="font-mono text-sm text-green-400 tracking-wider uppercase mb-4">// The Tool</h2>
+				<h3 class="text-3xl sm:text-4xl font-bold text-white mb-8">Catching Moles</h3>
+				<div class="p-8 bg-slate-900 border border-slate-700/50 rounded-lg">
+					<p class="text-gray-400 leading-relaxed text-lg mb-6">
+						An automated Azure security auditing tool that identifies misconfigurations, compliance gaps,
+						and security vulnerabilities in your cloud environment. Transform raw audit data into
+						prioritized, actionable insights.
+					</p>
+					<a href="#contact"
+						class="inline-flex items-center gap-2 font-mono text-sm text-green-400 hover:text-green-300 transition-colors">
+						<span>Learn more</span>
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-24 px-6 bg-slate-900/50">
+			<div class="max-w-4xl mx-auto text-center">
+				<h2 class="font-mono text-sm text-green-400 tracking-wider uppercase mb-4">// Contact</h2>
+				<h3 class="text-3xl sm:text-4xl font-bold text-white mb-8">Let's Connect</h3>
+				<p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+					Interested in improving your Azure security posture? Let's discuss how I can help.
+				</p>
+				<a href="mailto:info@catchingmoles.com"
+					class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-slate-950 font-mono font-semibold px-8 py-4 rounded transition-all">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+					</svg>
+					<span>Send an Email</span>
+				</a>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- ==================== FOOTER ==================== -->
+	<footer class="py-8 px-6 border-t border-slate-800">
+		<div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+			<p class="text-sm text-gray-500">
+				&copy; 2026 Catching Moles. All rights reserved.
+			</p>
+			<p class="font-mono text-xs text-gray-600">
+				// Built with security in mind
+			</p>
+		</div>
+	</footer>
+
+	<!-- ==================== SCRIPTS ==================== -->
+	<script>
+		(function () {
+			// Mobile menu toggle
+			var menuBtn = document.getElementById('mobile-menu-btn');
+			var mobileMenu = document.getElementById('mobile-menu');
+
+			if (menuBtn && mobileMenu) {
+				menuBtn.addEventListener('click', function () {
+					mobileMenu.classList.toggle('hidden');
+				});
+
+				// Close menu when clicking a link
+				mobileMenu.querySelectorAll('a').forEach(function (link) {
+					link.addEventListener('click', function () {
+						mobileMenu.classList.add('hidden');
+					});
+				});
+			}
+
+			// Preloader logic
+			var preloader = document.getElementById('preloader');
+			var terminalText = document.getElementById('terminal-text');
+
+			// Skip if preloader is already hidden
+			if (!preloader || document.documentElement.classList.contains('preloader-hidden')) {
+				return;
+			}
+
+			var text = '> init catchingmoles.py...';
+			var index = 0;
+			var typingSpeed = 50; // ms per character
+
+			function typeText() {
+				if (index < text.length) {
+					terminalText.textContent += text.charAt(index);
+					index++;
+					setTimeout(typeText, typingSpeed);
+				} else {
+					// Typing complete, wait a moment then fade out
+					setTimeout(function () {
+						preloader.classList.add('fade-out');
+
+						// Remove from DOM after animation
+						preloader.addEventListener('animationend', function () {
+							preloader.remove();
+						});
+
+						// Set timestamp for 24-hour cache
+						localStorage.setItem('moles_loader_timestamp', Date.now().toString());
+					}, 400);
+				}
+			}
+
+			// Start typing animation
+			typeText();
+		})();
+	</script>
+
+</body>
+
 </html>
