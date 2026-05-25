@@ -126,6 +126,33 @@
 		::-webkit-scrollbar-thumb:hover {
 			background: #475569;
 		}
+
+		/* Mole pop-up animation */
+		@keyframes molePopUp {
+			0% {
+				transform: translateY(100%);
+			}
+
+			20% {
+				transform: translateY(-8%);
+			}
+
+			30% {
+				transform: translateY(0);
+			}
+
+			78% {
+				transform: translateY(0);
+			}
+
+			100% {
+				transform: translateY(110%);
+			}
+		}
+
+		.mole-popping {
+			animation: molePopUp 2.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+		}
 	</style>
 </head>
 
@@ -185,6 +212,14 @@
 			</div>
 		</nav>
 	</header>
+
+	<!-- ==================== MOLE STAGE ==================== -->
+	<!-- Fixed overlay capped to header height; overflow:hidden clips the mole below the nav bar -->
+	<div id="mole-stage" class="fixed top-0 left-0 right-0 overflow-hidden pointer-events-none z-[45]"
+		style="height: 68px;">
+		<img id="mole-gif" src="images/original-6219872add0edcb8963b6f47b2f0cb84-ezgif.com-effects.gif" alt=""
+			aria-hidden="true" class="absolute bottom-0 w-10 h-auto" style="transform: translateY(110%); left: 50%;">
+	</div>
 
 	<!-- ==================== MAIN CONTENT ==================== -->
 	<main>
@@ -397,6 +432,45 @@
 
 			// Start typing animation
 			typeText();
+		})();
+	</script>
+
+	<script>
+		// Mole pop-up easter egg
+		(function () {
+			var mole = document.getElementById('mole-gif');
+			var stage = document.getElementById('mole-stage');
+			if (!mole || !stage) return;
+
+			// Match stage height to actual rendered header
+			var header = document.querySelector('header');
+			if (header) {
+				stage.style.height = header.offsetHeight + 'px';
+			}
+
+			var moleWidth = 40; // w-10 = 40px
+			var animDuration = 2800; // ms, matches CSS animation
+
+			function popMole() {
+				// Pick a random horizontal position, padded from edges
+				var padding = 24;
+				var maxLeft = window.innerWidth - moleWidth - padding;
+				var randomLeft = Math.floor(Math.random() * (maxLeft - padding) + padding);
+
+				mole.style.left = randomLeft + 'px';
+
+				// Reset then trigger animation
+				mole.classList.remove('mole-popping');
+				void mole.offsetWidth; // force reflow
+				mole.classList.add('mole-popping');
+
+				// Schedule next appearance: animation time + 8–14s random gap
+				var gap = 8000 + Math.random() * 6000;
+				setTimeout(popMole, animDuration + gap);
+			}
+
+			// First appearance: 5s after load
+			setTimeout(popMole, 5000);
 		})();
 	</script>
 
