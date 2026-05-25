@@ -432,7 +432,6 @@
 				var hero = document.getElementById('hero');
 				if (!hero) return null;
 
-				var heroRect = hero.getBoundingClientRect();
 				var heroW = hero.offsetWidth;
 				var heroH = hero.offsetHeight;
 
@@ -440,15 +439,18 @@
 					? Math.round(mole.naturalHeight * (MOLE_W / mole.naturalWidth))
 					: MOLE_W;
 
-				// Bottom edge of the scroll indicator = bottom edge of all hero text content.
+				// offsetTop is relative to the hero section (its offsetParent, since hero is
+				// position:relative). This is scroll-independent and always correct at render time.
 				var indicator = hero.querySelector('.animate-bounce');
 				var topMin;
 				if (indicator) {
-					// Convert viewport-relative bottom to hero-relative top.
-					topMin = Math.round(indicator.getBoundingClientRect().bottom - heroRect.top) + 28;
+					topMin = indicator.offsetTop + indicator.offsetHeight + 28;
 				} else {
 					topMin = Math.round(heroH * 0.78);
 				}
+
+				// Hard floor: never place above 55% of the hero height regardless of calculation.
+				topMin = Math.max(topMin, Math.round(heroH * 0.55));
 
 				var topMax = heroH - moleH - 16;
 				if (topMax < topMin + 10) return null; // not enough vertical room
