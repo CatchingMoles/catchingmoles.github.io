@@ -127,40 +127,19 @@
 			background: #475569;
 		}
 
-		/* Mole easter egg */
-		@keyframes molePop {
-			0% {
-				opacity: 0;
-				transform: translateY(8px) scale(0.75);
-			}
-
-			12% {
-				opacity: 1;
-				transform: translateY(0) scale(1);
-			}
-
-			80% {
-				opacity: 1;
-				transform: translateY(0) scale(1);
-			}
-
-			100% {
-				opacity: 0;
-				transform: translateY(8px) scale(0.8);
-			}
-		}
-
+		/* Mole easter egg — no keyframes; the GIF animates itself */
 		#mole-gif {
-			position: fixed;
-			z-index: 45;
+			position: absolute;
+			z-index: 10;
 			pointer-events: none;
-			width: 36px;
+			width: 64px;
 			height: auto;
 			opacity: 0;
+			transition: opacity 0.35s ease;
 		}
 
-		#mole-gif.mole-popping {
-			animation: molePop 3.4s ease-in-out forwards;
+		#mole-gif.mole-visible {
+			opacity: 1;
 		}
 	</style>
 </head>
@@ -222,14 +201,11 @@
 		</nav>
 	</header>
 
-	<!-- MOLE EASTER EGG: single fixed img, position set dynamically to the empty center zone of the nav -->
-	<img id="mole-gif" src="images/mole.gif" alt="" aria-hidden="true">
-
 	<!-- ==================== MAIN CONTENT ==================== -->
 	<main>
 
 		<!-- Hero Section -->
-		<section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-20">
+		<section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
 			<div class="max-w-4xl mx-auto text-center">
 				<!-- Tagline -->
 				<p class="font-mono text-sm text-green-400 tracking-wider uppercase mb-6">
@@ -264,6 +240,8 @@
 					</svg>
 				</div>
 			</div>
+			<!-- Mole easter egg: absolutely positioned inside hero, placed below text content by JS -->
+			<img id="mole-gif" src="images/mole.gif" alt="" aria-hidden="true">
 		</section>
 
 		<!-- About Section -->
@@ -445,49 +423,46 @@
 			var mole = document.getElementById('mole-gif');
 			if (!mole) return;
 
-			var MOLE_W = 36;  // matches CSS width
-			var ANIM_MS = 3400; // matches CSS animation duration
-			var moleSrc = mole.src; // store absolute src before any manipulation
+			var MOLE_W = 64;    // matches CSS width
+			var SHOW_MS = 3500;  // how long the mole stays visible
 
-			// Returns a {left, top} position in the EMPTY CENTER ZONE of the nav bar,
-			// or null if there is no safe gap (e.g. very narrow viewport).
+			// Returns a random {left, top} in the empty space BELOW the hero text content.
+			// All coordinates are relative to the hero section (position: absolute context).
 			function getSafeZone() {
-				var header = document.querySelector('header');
-				if (!header) return null;
+				var hero = document.getElementById('hero');
+				if (!hero) return null;
 
-				var headerH = header.offsetHeight;
+				var heroRect = hero.getBoundingClientRect();
+				var heroW = hero.offsetWidth;
+				var heroH = hero.offsetHeight;
 
-				// Measured height of the rendered mole; fall back to MOLE_W if not loaded yet.
 				var moleH = (mole.naturalWidth > 0)
 					? Math.round(mole.naturalHeight * (MOLE_W / mole.naturalWidth))
 					: MOLE_W;
 
-				// Vertical centre inside the header, clamped to at least 4px from top.
-				var top = Math.max(4, Math.round((headerH - moleH) / 2));
+				// Bottom edge of the scroll indicator = bottom edge of all hero text content.
+				var indicator = hero.querySelector('.animate-bounce');
+				var topMin;
+				if (indicator) {
+					// Convert viewport-relative bottom to hero-relative top.
+					topMin = Math.round(indicator.getBoundingClientRect().bottom - heroRect.top) + 28;
+				} else {
+					topMin = Math.round(heroH * 0.78);
+				}
 
-				// --- Horizontal safe zone ---
-				// Left boundary: right edge of the logo anchor + margin
-				var logoEl = header.querySelector('a');
-				var logoRight = logoEl ? (logoEl.getBoundingClientRect().right + 20) : 120;
+				var topMax = heroH - moleH - 16;
+				if (topMax < topMin + 10) return null; // not enough vertical room
 
-				// Right boundary: depends on whether desktop nav or mobile hamburger is visible
-				var navUl = header.querySelector('ul');
-				var navVisible = navUl && getComputedStyle(navUl).display !== 'none';
-				var rightEl = navVisible ? navUl : document.getElementById('mobile-menu-btn');
-				var navLeft = rightEl
-					? (rightEl.getBoundingClientRect().left - MOLE_W - 20)
-					: (window.innerWidth - 80);
+				var pad = 16;
+				var left = pad + Math.floor(Math.random() * (heroW - MOLE_W - pad * 2));
+				var top = topMin + Math.floor(Math.random() * (topMax - topMin));
 
-				if (navLeft <= logoRight) return null; // no gap wide enough
-
-				var left = logoRight + Math.floor(Math.random() * (navLeft - logoRight));
 				return { left: left, top: top };
 			}
 
 			function popMole() {
 				var zone = getSafeZone();
 				if (!zone) {
-					// No safe gap (very narrow viewport); try again later.
 					setTimeout(popMole, 12000);
 					return;
 				}
@@ -495,18 +470,15 @@
 				mole.style.left = zone.left + 'px';
 				mole.style.top = zone.top + 'px';
 
-				// Reset GIF to frame 1 by clearing then restoring src.
-				mole.src = '';
-				requestAnimationFrame(function () {
-					mole.src = moleSrc;
-					mole.classList.remove('mole-popping');
-					void mole.offsetWidth; // force style recalc
-					mole.classList.add('mole-popping');
-				});
+				// Show — the GIF loops on its own; CSS opacity handles visibility only.
+				mole.classList.add('mole-visible');
 
-				// Schedule next appearance: animation duration + random 8-14 s gap
-				var gap = 8000 + Math.random() * 6000;
-				setTimeout(popMole, ANIM_MS + gap);
+				setTimeout(function () {
+					mole.classList.remove('mole-visible');
+					// Next pop: random 9–15 s after the fade-out finishes
+					var gap = 9000 + Math.random() * 6000;
+					setTimeout(popMole, gap + 350); // +350 matches fade-out transition
+				}, SHOW_MS);
 			}
 
 			// First appearance after 5 s
