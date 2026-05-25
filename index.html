@@ -127,7 +127,7 @@
 			background: #475569;
 		}
 
-		/* Mole easter egg — no keyframes; the GIF animates itself */
+		/* Mole easter egg — fade-in only; hide snaps at exact GIF loop end */
 		#mole-gif {
 			position: absolute;
 			z-index: 10;
@@ -135,7 +135,6 @@
 			width: 64px;
 			height: auto;
 			opacity: 0;
-			transition: opacity 0.35s ease;
 		}
 
 		#mole-gif.mole-visible {
@@ -424,7 +423,7 @@
 			if (!mole) return;
 
 			var MOLE_W = 64;    // matches CSS width
-			var SHOW_MS = 3500;  // how long the mole stays visible
+			var SHOW_MS = 6300;  // exactly one GIF loop (00:00:06.30)
 			var CONTENT_MAX_W = 896;   // max-w-4xl in pixels
 
 			function getSafeZone() {
@@ -481,14 +480,19 @@
 				mole.style.left = zone.left + 'px';
 				mole.style.top = zone.top + 'px';
 
-				// Show — the GIF loops on its own; CSS opacity handles visibility only.
+				// Fade in softly — transition applied only on show, not on hide.
+				mole.style.transition = 'opacity 0.25s ease';
 				mole.classList.add('mole-visible');
 
 				setTimeout(function () {
+					// Snap to hidden at the exact end of one GIF loop.
+					// No fade-out: the GIF is back at frame 1, so it disappears cleanly.
+					mole.style.transition = 'none';
 					mole.classList.remove('mole-visible');
-					// Next pop: random 9–15 s after the fade-out finishes.
+
+					// Next pop: random 9–15 s gap (no extra delay needed — hide is instant).
 					var gap = 9000 + Math.random() * 6000;
-					setTimeout(popMole, gap + 350); // +350 matches fade-out transition
+					setTimeout(popMole, gap);
 				}, SHOW_MS);
 			}
 
