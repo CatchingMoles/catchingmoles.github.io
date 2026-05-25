@@ -126,20 +126,6 @@
 		::-webkit-scrollbar-thumb:hover {
 			background: #475569;
 		}
-
-		/* Mole easter egg — fade-in only; hide snaps at exact GIF loop end */
-		#mole-gif {
-			position: absolute;
-			z-index: 10;
-			pointer-events: none;
-			width: 64px;
-			height: auto;
-			opacity: 0;
-		}
-
-		#mole-gif.mole-visible {
-			opacity: 1;
-		}
 	</style>
 </head>
 
@@ -159,8 +145,14 @@
 		<nav class="max-w-6xl mx-auto px-6 py-4">
 			<div class="flex items-center justify-between">
 				<!-- Logo -->
-				<a href="#" class="font-mono text-lg font-semibold text-white hover:text-green-400 transition-colors">
+				<a href="#"
+					class="group flex items-center gap-2 font-mono text-lg font-semibold text-white hover:text-green-400 transition-colors">
 					&lt;CM/&gt;
+					<span
+						class="flex items-end w-7 h-7 overflow-hidden rounded bg-slate-800 border border-slate-700 flex-shrink-0">
+						<img src="images/mole.gif" alt="" aria-hidden="true"
+							class="w-full h-full object-cover opacity-40 grayscale translate-y-1 group-hover:opacity-100 group-hover:grayscale-0 group-hover:translate-y-0 transition-all duration-300">
+					</span>
 				</a>
 
 				<!-- Desktop Navigation -->
@@ -239,8 +231,6 @@
 					</svg>
 				</div>
 			</div>
-			<!-- Mole easter egg: absolutely positioned inside hero, placed below text content by JS -->
-			<img id="mole-gif" src="images/mole.gif" alt="" aria-hidden="true">
 		</section>
 
 		<!-- About Section -->
@@ -416,99 +406,6 @@
 		})();
 	</script>
 
-	<script>
-		// Mole pop-up easter egg
-		(function () {
-			var mole = document.getElementById('mole-gif');
-			if (!mole) return;
-
-			var MOLE_W = 64;    // matches CSS width
-			var SHOW_MS = 6300;  // exactly one GIF loop (00:00:06.30)
-			var CONTENT_MAX_W = 896;   // max-w-4xl in pixels
-
-			function getSafeZone() {
-				var hero = document.getElementById('hero');
-				if (!hero) return null;
-
-				var heroW = hero.offsetWidth;
-				var heroH = hero.offsetHeight;
-
-				// Width of the empty sidebar on each side of the centered text block.
-				var whitespaceWidth = (heroW - CONTENT_MAX_W) / 2;
-
-				var left, top;
-
-				if (whitespaceWidth > MOLE_W + 24) {
-					// ── DESKTOP / TABLET ─────────────────────────────────────────
-					// Randomly pick left or right whitespace column (50 / 50).
-					var useLeftSide = Math.random() < 0.5;
-
-					if (useLeftSide) {
-						var lMin = 16;
-						var lMax = whitespaceWidth - MOLE_W - 16;
-						left = lMin + Math.floor(Math.random() * Math.max(1, lMax - lMin));
-					} else {
-						var rMin = heroW - whitespaceWidth + 16;
-						var rMax = heroW - MOLE_W - 16;
-						left = rMin + Math.floor(Math.random() * Math.max(1, rMax - rMin));
-					}
-
-					// Vertical: keep strictly within the middle third of the hero.
-					var topMin = Math.round(heroH * 0.30);
-					var topMax = Math.round(heroH * 0.70);
-					top = topMin + Math.floor(Math.random() * Math.max(1, topMax - topMin));
-
-				} else {
-					// ── MOBILE ───────────────────────────────────────────────────
-					// No usable sidebars; place anywhere horizontally with padding,
-					// and pin vertically just above the scroll indicator at 82 %.
-					var pad = 16;
-					left = pad + Math.floor(Math.random() * Math.max(1, heroW - MOLE_W - pad * 2));
-					top = Math.round(heroH * 0.82);
-				}
-
-				return { left: left, top: top };
-			}
-
-			function popMole() {
-				var zone = getSafeZone();
-				if (!zone) {
-					setTimeout(popMole, 12000);
-					return;
-				}
-
-				mole.style.left = zone.left + 'px';
-				mole.style.top = zone.top + 'px';
-
-				// Reset GIF to frame 1 while opacity is still 0 (invisible — no flicker).
-				// Setting src to '' then forcing a synchronous reflow (void offsetWidth)
-				// commits the clear before restoring the src, which reliably restarts
-				// playback from frame 1 even when the browser has the image cached.
-				mole.src = '';
-				void mole.offsetWidth; // flush — guarantees src='' is committed
-				mole.src = 'images/mole.gif';
-
-				// One rAF so the browser paints frame 1 before the fade-in starts.
-				requestAnimationFrame(function () {
-					mole.style.transition = 'opacity 0.25s ease';
-					mole.classList.add('mole-visible');
-
-					setTimeout(function () {
-						// Snap to hidden at the exact end of one GIF loop.
-						mole.style.transition = 'none';
-						mole.classList.remove('mole-visible');
-
-						// Next pop: random 9–15 s gap.
-						var gap = 9000 + Math.random() * 6000;
-						setTimeout(popMole, gap);
-					}, SHOW_MS);
-				});
-			}
-
-			// First appearance after 5 s
-			setTimeout(popMole, 5000);
-		})();
-	</script>
 
 </body>
 
