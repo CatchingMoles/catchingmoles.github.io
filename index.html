@@ -481,29 +481,27 @@
 				mole.style.top = zone.top + 'px';
 
 				// Reset GIF to frame 1 while opacity is still 0 (invisible — no flicker).
-				// Double rAF: frame 1 clears src, frame 2 restores it so the browser
-				// restarts playback from the beginning before we fade in.
-				var originalSrc = mole.getAttribute('src') || 'images/mole.gif';
-				mole.removeAttribute('src');
+				// Setting src to '' then forcing a synchronous reflow (void offsetWidth)
+				// commits the clear before restoring the src, which reliably restarts
+				// playback from frame 1 even when the browser has the image cached.
+				mole.src = '';
+				void mole.offsetWidth; // flush — guarantees src='' is committed
+				mole.src = 'images/mole.gif';
 
+				// One rAF so the browser paints frame 1 before the fade-in starts.
 				requestAnimationFrame(function () {
-					mole.setAttribute('src', originalSrc);
+					mole.style.transition = 'opacity 0.25s ease';
+					mole.classList.add('mole-visible');
 
-					requestAnimationFrame(function () {
-						// GIF is now at frame 1. Fade in.
-						mole.style.transition = 'opacity 0.25s ease';
-						mole.classList.add('mole-visible');
+					setTimeout(function () {
+						// Snap to hidden at the exact end of one GIF loop.
+						mole.style.transition = 'none';
+						mole.classList.remove('mole-visible');
 
-						setTimeout(function () {
-							// Snap to hidden at the exact end of one GIF loop.
-							mole.style.transition = 'none';
-							mole.classList.remove('mole-visible');
-
-							// Next pop: random 9–15 s gap.
-							var gap = 9000 + Math.random() * 6000;
-							setTimeout(popMole, gap);
-						}, SHOW_MS);
-					});
+						// Next pop: random 9–15 s gap.
+						var gap = 9000 + Math.random() * 6000;
+						setTimeout(popMole, gap);
+					}, SHOW_MS);
 				});
 			}
 
