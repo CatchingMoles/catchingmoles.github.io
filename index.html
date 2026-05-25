@@ -425,9 +425,8 @@
 
 			var MOLE_W = 64;    // matches CSS width
 			var SHOW_MS = 3500;  // how long the mole stays visible
+			var CONTENT_MAX_W = 896;   // max-w-4xl in pixels
 
-			// Returns a random {left, top} in the empty space BELOW the hero text content.
-			// All coordinates are relative to the hero section (position: absolute context).
 			function getSafeZone() {
 				var hero = document.getElementById('hero');
 				if (!hero) return null;
@@ -435,29 +434,39 @@
 				var heroW = hero.offsetWidth;
 				var heroH = hero.offsetHeight;
 
-				var moleH = (mole.naturalWidth > 0)
-					? Math.round(mole.naturalHeight * (MOLE_W / mole.naturalWidth))
-					: MOLE_W;
+				// Width of the empty sidebar on each side of the centered text block.
+				var whitespaceWidth = (heroW - CONTENT_MAX_W) / 2;
 
-				// offsetTop is relative to the hero section (its offsetParent, since hero is
-				// position:relative). This is scroll-independent and always correct at render time.
-				var indicator = hero.querySelector('.animate-bounce');
-				var topMin;
-				if (indicator) {
-					topMin = indicator.offsetTop + indicator.offsetHeight + 28;
+				var left, top;
+
+				if (whitespaceWidth > MOLE_W + 24) {
+					// ── DESKTOP / TABLET ─────────────────────────────────────────
+					// Randomly pick left or right whitespace column (50 / 50).
+					var useLeftSide = Math.random() < 0.5;
+
+					if (useLeftSide) {
+						var lMin = 16;
+						var lMax = whitespaceWidth - MOLE_W - 16;
+						left = lMin + Math.floor(Math.random() * Math.max(1, lMax - lMin));
+					} else {
+						var rMin = heroW - whitespaceWidth + 16;
+						var rMax = heroW - MOLE_W - 16;
+						left = rMin + Math.floor(Math.random() * Math.max(1, rMax - rMin));
+					}
+
+					// Vertical: keep strictly within the middle third of the hero.
+					var topMin = Math.round(heroH * 0.30);
+					var topMax = Math.round(heroH * 0.70);
+					top = topMin + Math.floor(Math.random() * Math.max(1, topMax - topMin));
+
 				} else {
-					topMin = Math.round(heroH * 0.78);
+					// ── MOBILE ───────────────────────────────────────────────────
+					// No usable sidebars; place anywhere horizontally with padding,
+					// and pin vertically just above the scroll indicator at 82 %.
+					var pad = 16;
+					left = pad + Math.floor(Math.random() * Math.max(1, heroW - MOLE_W - pad * 2));
+					top = Math.round(heroH * 0.82);
 				}
-
-				// Hard floor: never place above 55% of the hero height regardless of calculation.
-				topMin = Math.max(topMin, Math.round(heroH * 0.55));
-
-				var topMax = heroH - moleH - 16;
-				if (topMax < topMin + 10) return null; // not enough vertical room
-
-				var pad = 16;
-				var left = pad + Math.floor(Math.random() * (heroW - MOLE_W - pad * 2));
-				var top = topMin + Math.floor(Math.random() * (topMax - topMin));
 
 				return { left: left, top: top };
 			}
@@ -477,7 +486,7 @@
 
 				setTimeout(function () {
 					mole.classList.remove('mole-visible');
-					// Next pop: random 9–15 s after the fade-out finishes
+					// Next pop: random 9–15 s after the fade-out finishes.
 					var gap = 9000 + Math.random() * 6000;
 					setTimeout(popMole, gap + 350); // +350 matches fade-out transition
 				}, SHOW_MS);
