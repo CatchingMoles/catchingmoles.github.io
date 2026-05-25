@@ -127,31 +127,40 @@
 			background: #475569;
 		}
 
-		/* Mole pop-up animation */
-		@keyframes molePopUp {
+		/* Mole easter egg */
+		@keyframes molePop {
 			0% {
-				transform: translateY(100%);
+				opacity: 0;
+				transform: translateY(8px) scale(0.75);
 			}
 
-			20% {
-				transform: translateY(-8%);
+			12% {
+				opacity: 1;
+				transform: translateY(0) scale(1);
 			}
 
-			30% {
-				transform: translateY(0);
-			}
-
-			78% {
-				transform: translateY(0);
+			80% {
+				opacity: 1;
+				transform: translateY(0) scale(1);
 			}
 
 			100% {
-				transform: translateY(110%);
+				opacity: 0;
+				transform: translateY(8px) scale(0.8);
 			}
 		}
 
-		.mole-popping {
-			animation: molePopUp 2.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+		#mole-gif {
+			position: fixed;
+			z-index: 45;
+			pointer-events: none;
+			width: 36px;
+			height: auto;
+			opacity: 0;
+		}
+
+		#mole-gif.mole-popping {
+			animation: molePop 3.4s ease-in-out forwards;
 		}
 	</style>
 </head>
@@ -213,13 +222,8 @@
 		</nav>
 	</header>
 
-	<!-- ==================== MOLE STAGE ==================== -->
-	<!-- Fixed overlay capped to header height; overflow:hidden clips the mole below the nav bar -->
-	<div id="mole-stage" class="fixed top-0 left-0 right-0 overflow-hidden pointer-events-none z-[45]"
-		style="height: 68px;">
-		<img id="mole-gif" src="images/original-6219872add0edcb8963b6f47b2f0cb84-ezgif.com-effects.gif" alt=""
-			aria-hidden="true" class="absolute bottom-0 w-10 h-auto" style="transform: translateY(110%); left: 50%;">
-	</div>
+	<!-- MOLE EASTER EGG: single fixed img, position set dynamically to the empty center zone of the nav -->
+	<img id="mole-gif" src="images/mole.gif" alt="" aria-hidden="true">
 
 	<!-- ==================== MAIN CONTENT ==================== -->
 	<main>
@@ -439,37 +443,73 @@
 		// Mole pop-up easter egg
 		(function () {
 			var mole = document.getElementById('mole-gif');
-			var stage = document.getElementById('mole-stage');
-			if (!mole || !stage) return;
+			if (!mole) return;
 
-			// Match stage height to actual rendered header
-			var header = document.querySelector('header');
-			if (header) {
-				stage.style.height = header.offsetHeight + 'px';
+			var MOLE_W = 36;  // matches CSS width
+			var ANIM_MS = 3400; // matches CSS animation duration
+			var moleSrc = mole.src; // store absolute src before any manipulation
+
+			// Returns a {left, top} position in the EMPTY CENTER ZONE of the nav bar,
+			// or null if there is no safe gap (e.g. very narrow viewport).
+			function getSafeZone() {
+				var header = document.querySelector('header');
+				if (!header) return null;
+
+				var headerH = header.offsetHeight;
+
+				// Measured height of the rendered mole; fall back to MOLE_W if not loaded yet.
+				var moleH = (mole.naturalWidth > 0)
+					? Math.round(mole.naturalHeight * (MOLE_W / mole.naturalWidth))
+					: MOLE_W;
+
+				// Vertical centre inside the header, clamped to at least 4px from top.
+				var top = Math.max(4, Math.round((headerH - moleH) / 2));
+
+				// --- Horizontal safe zone ---
+				// Left boundary: right edge of the logo anchor + margin
+				var logoEl = header.querySelector('a');
+				var logoRight = logoEl ? (logoEl.getBoundingClientRect().right + 20) : 120;
+
+				// Right boundary: depends on whether desktop nav or mobile hamburger is visible
+				var navUl = header.querySelector('ul');
+				var navVisible = navUl && getComputedStyle(navUl).display !== 'none';
+				var rightEl = navVisible ? navUl : document.getElementById('mobile-menu-btn');
+				var navLeft = rightEl
+					? (rightEl.getBoundingClientRect().left - MOLE_W - 20)
+					: (window.innerWidth - 80);
+
+				if (navLeft <= logoRight) return null; // no gap wide enough
+
+				var left = logoRight + Math.floor(Math.random() * (navLeft - logoRight));
+				return { left: left, top: top };
 			}
-
-			var moleWidth = 40; // w-10 = 40px
-			var animDuration = 2800; // ms, matches CSS animation
 
 			function popMole() {
-				// Pick a random horizontal position, padded from edges
-				var padding = 24;
-				var maxLeft = window.innerWidth - moleWidth - padding;
-				var randomLeft = Math.floor(Math.random() * (maxLeft - padding) + padding);
+				var zone = getSafeZone();
+				if (!zone) {
+					// No safe gap (very narrow viewport); try again later.
+					setTimeout(popMole, 12000);
+					return;
+				}
 
-				mole.style.left = randomLeft + 'px';
+				mole.style.left = zone.left + 'px';
+				mole.style.top = zone.top + 'px';
 
-				// Reset then trigger animation
-				mole.classList.remove('mole-popping');
-				void mole.offsetWidth; // force reflow
-				mole.classList.add('mole-popping');
+				// Reset GIF to frame 1 by clearing then restoring src.
+				mole.src = '';
+				requestAnimationFrame(function () {
+					mole.src = moleSrc;
+					mole.classList.remove('mole-popping');
+					void mole.offsetWidth; // force style recalc
+					mole.classList.add('mole-popping');
+				});
 
-				// Schedule next appearance: animation time + 8–14s random gap
+				// Schedule next appearance: animation duration + random 8-14 s gap
 				var gap = 8000 + Math.random() * 6000;
-				setTimeout(popMole, animDuration + gap);
+				setTimeout(popMole, ANIM_MS + gap);
 			}
 
-			// First appearance: 5s after load
+			// First appearance after 5 s
 			setTimeout(popMole, 5000);
 		})();
 	</script>
